@@ -1,0 +1,157 @@
+1. What are the operators used in the WHERE clause?
+
+The WHERE clause is used to filter records based on specified conditions.
+
+Operator	Description
+=	Equal to
+>	Greater than
+<	Less than
+>=	Greater than or equal to
+<=	Less than or equal to
+<> or !=	Not equal to
+BETWEEN	Checks whether a value is within a specified range
+LIKE	Searches for a pattern
+IN	Specifies multiple possible values for a column
+
+2. What is the MySQL AND operator?
+
+The AND operator is used to filter records based on more than one condition.
+The WHERE clause can contain one or more AND operators.
+A record is returned only if all the conditions are TRUE.
+Example:
+SELECT * FROM Employees
+WHERE Department = 'IT' AND Salary > 50000;
+
+3. What is the MySQL OR operator?
+The OR operator is used to filter records based on multiple conditions.
+The WHERE clause can contain one or more OR operators.
+A record is returned if any one of the conditions is TRUE.
+Example:
+SELECT * FROM Employees
+WHERE Department = 'IT' OR Department = 'HR';
+
+4. What is the MySQL NOT operator?
+The NOT operator is used to return all records that do not satisfy the specified condition.
+It reverses the result of a condition:
+TRUE becomes FALSE
+FALSE becomes TRUE
+It is commonly used with:
+NOT LIKE
+NOT BETWEEN
+NOT IN
+IS NOT NULL
+NOT EXISTS
+Example:
+SELECT * FROM Employees
+WHERE NOT Department = 'IT';
+
+5. What is the MySQL INSERT INTO statement?
+The INSERT INTO statement is used to insert new records into a table.
+Syntax 1 (Specify column names)
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+Syntax 2 (Insert values into all columns)
+If values are provided for every column, column names can be omitted. The values must follow the same order as the table columns.
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+
+6. What is a NULL value in MySQL?
+A NULL value represents unknown, missing, or inapplicable data in a database field.
+Key points:
+It is not a value itself.
+It indicates the absence of data.
+It is different from 0 (zero).
+It is different from an empty string ('').
+
+A field with a NULL value has been left blank when the record was created.
+
+Important Note
+
+You cannot compare NULL using comparison operators such as:
+
+=
+<
+>
+<>
+
+Instead, use:
+
+IS NULL
+IS NOT NULL
+
+Example:
+
+SELECT * FROM Employees
+WHERE Email IS NULL;
+
+7. What is the MySQL LIMIT clause?
+The LIMIT clause is used to restrict the number of records returned by a query.
+It is especially useful when working with large tables because returning fewer rows improves performance.
+
+Example:
+
+SELECT * FROM Employees
+LIMIT 5;
+This query returns only the first five records.
+
+8. What are MySQL Aggregate Functions?
+
+Aggregate functions perform calculations on a set of values and return a single result.
+
+They are commonly used with the GROUP BY clause.
+
+Common aggregate functions include:
+
+Function	Description
+MIN()	Returns the smallest value
+MAX()	Returns the largest value
+COUNT()	Returns the number of rows
+SUM()	Returns the total of a numeric column
+AVG()	Returns the average value of a numeric column
+
+Note: Aggregate functions ignore NULL values except COUNT(*).
+
+9. What is the MySQL COUNT() function?
+
+The COUNT() function returns the number of rows that match a specified condition.
+
+Types of COUNT()
+
+1. COUNT(*)
+
+Counts all rows, including rows containing NULL values.
+
+SELECT COUNT(*) FROM Employees;
+
+2. COUNT(column_name)
+
+Counts only the non-NULL values in the specified column.
+
+SELECT COUNT(Email) FROM Employees;
+
+3. COUNT(DISTINCT column_name)
+
+Counts only unique, non-NULL values.
+
+SELECT COUNT(DISTINCT Department)
+FROM Employees;
+10. What is the MySQL LIKE operator?
+
+The LIKE operator is used in the WHERE clause to search for a specific pattern in text data.
+
+Wildcards used with LIKE
+Wildcard	Description
+%	Represents zero, one, or multiple characters
+_	Represents exactly one character
+
+Both wildcards can also be combined.
+
+Examples
+Query	Description
+WHERE CustomerName LIKE 'a%'	Finds values that start with a
+WHERE CustomerName LIKE '%a'	Finds values that end with a
+WHERE CustomerName LIKE '%or%'	Finds values containing or anywhere
+WHERE CustomerName LIKE '_r%'	Finds values with r as the second character
+WHERE CustomerName LIKE 'a_%'	Finds values starting with a and having at least 2 characters
+WHERE CustomerName LIKE 'a__%'	Finds values starting with a and having at least 3 characters
+WHERE ContactName LIKE 'a%o'	Finds values starting with a and ending with o
